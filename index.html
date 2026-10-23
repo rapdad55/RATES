@@ -1,794 +1,299 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SGauge / RAPDAD RADIO – Services & Rates</title>
 <meta name="description" content="Recording, mixing, production, video, photo, content and artist development services from SGauge / RAPDAD RADIO. Denver, CO.">
+<meta name="color-scheme" content="dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Big+Shoulders+Display:wght@700;800;900&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0b;
-    --bg-2: #111113;
-    --card: #151518;
-    --line: #26262b;
-    --text: #f2f2f0;
-    --muted: #9b9ba3;
-    --cyan: #00e5ff;
-    --lime: #c6ff00;
-    --radius: 18px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    line-height: 1.55;
-    -webkit-font-smoothing: antialiased;
-  }
-  a { color: inherit; text-decoration: none; }
-  .wrap { width: min(1120px, 100% - 40px); margin-inline: auto; }
-
-  /* HERO */
-  .hero {
-    position: relative;
-    padding: 88px 0 72px;
-    text-align: center;
-    overflow: hidden;
-    border-bottom: 1px solid var(--line);
-  }
-  .hero::before, .hero::after {
-    content: "";
-    position: absolute;
-    width: 520px; height: 520px;
-    border-radius: 50%;
-    filter: blur(120px);
-    opacity: .16;
-    pointer-events: none;
-  }
-  .hero::before { background: var(--cyan); top: -260px; left: -140px; }
-  .hero::after  { background: var(--lime); bottom: -300px; right: -140px; }
-  .eyebrow {
-    display: inline-block;
-    font-size: .78rem;
-    letter-spacing: .22em;
-    text-transform: uppercase;
-    color: var(--lime);
-    border: 1px solid rgba(198,255,0,.35);
-    padding: 6px 14px;
-    border-radius: 999px;
-    margin-bottom: 26px;
-  }
-  .hero h1 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2.6rem, 8vw, 5.2rem);
-    line-height: 1.02;
-    letter-spacing: -.02em;
-    position: relative;
-  }
-  .hero h1 span {
-    background: linear-gradient(90deg, var(--cyan), var(--lime));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .hero p.sub {
-    margin: 20px auto 0;
-    max-width: 560px;
-    color: var(--muted);
-    font-size: 1.08rem;
-    position: relative;
-  }
-  .hero-actions {
-    margin-top: 34px;
-    display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
-    position: relative;
-  }
-  .btn {
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 14px 26px;
-    border-radius: 999px;
-    font-weight: 600;
-    font-size: .98rem;
-    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
-  }
-  .btn:hover { transform: translateY(-2px); }
-  .btn-primary { background: linear-gradient(90deg, var(--cyan), var(--lime)); color: #0a0a0b; box-shadow: 0 8px 30px rgba(0,229,255,.22); }
-  .btn-ghost { border: 1px solid var(--line); background: var(--card); }
-  .btn-ghost:hover { border-color: var(--cyan); }
-
-  .trust {
-    margin-top: 44px;
-    display: flex; gap: 10px 28px; justify-content: center; flex-wrap: wrap;
-    color: var(--muted); font-size: .9rem;
-    position: relative;
-  }
-  .trust b { color: var(--text); font-weight: 600; }
-
-  /* NAV / FILTER */
-  .filters {
-    position: sticky; top: 0; z-index: 20;
-    background: rgba(10,10,11,.85);
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--line);
-  }
-  .filters .wrap {
-    display: flex; gap: 8px; padding: 14px 0; overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .filters .wrap::-webkit-scrollbar { display: none; }
-  .chip {
-    flex: none;
-    border: 1px solid var(--line);
-    background: transparent;
-    color: var(--muted);
-    padding: 9px 18px;
-    border-radius: 999px;
-    font: 500 .9rem 'Inter', sans-serif;
-    cursor: pointer;
-    transition: all .15s ease;
-  }
-  .chip:hover { color: var(--text); border-color: #3a3a41; }
-  .chip.active { background: var(--cyan); color: #0a0a0b; border-color: var(--cyan); }
-
-  /* NOTICE */
-  .notice {
-    margin: 36px 0 8px;
-    display: grid; gap: 14px;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  }
-  .notice div {
-    background: var(--bg-2);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    padding: 16px 18px;
-    font-size: .92rem;
-    color: var(--muted);
-  }
-  .notice strong { display: block; color: var(--lime); font-family: 'Space Grotesk', sans-serif; font-size: 1rem; margin-bottom: 2px; }
-
-  /* SECTIONS */
-  main { padding-bottom: 40px; }
-  .group { margin-top: 56px; }
-  .group-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
-  .group-head .num {
-    font-family: 'Space Grotesk', sans-serif;
-    color: var(--cyan);
-    font-size: .95rem;
-    letter-spacing: .1em;
-  }
-  .group-head h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(1.5rem, 3.5vw, 2rem);
-    letter-spacing: -.01em;
-  }
-  .group-head p { color: var(--muted); font-size: .95rem; flex-basis: 100%; }
-  .grid { display: grid; gap: 18px; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
-  .card {
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 26px;
-    display: flex; flex-direction: column;
-    transition: border-color .2s ease, transform .2s ease;
-  }
-  .card:hover { border-color: rgba(0,229,255,.5); transform: translateY(-3px); }
-  .card.feature { border-color: rgba(198,255,0,.35); background: linear-gradient(180deg, rgba(198,255,0,.05), var(--card) 40%); }
-  .card h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.2rem; margin-bottom: 4px; }
-  .card .desc { color: var(--muted); font-size: .9rem; margin-bottom: 16px; }
-  .rows { list-style: none; margin-top: auto; }
-  .rows li {
-    display: flex; align-items: baseline; gap: 10px;
-    padding: 9px 0;
-    border-top: 1px dashed var(--line);
-    font-size: .94rem;
-  }
-  .rows li:first-child { border-top: 0; }
-  .rows .name { flex: 1; }
-  .rows .name small { display: block; color: var(--muted); font-size: .78rem; margin-top: 1px; }
-  .rows .price { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--lime); white-space: nowrap; text-align: right; }
-  .rows .price small { display: block; font-family: 'Inter', sans-serif; font-weight: 400; color: var(--muted); font-size: .74rem; }
-  .tag { display: inline-block; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: var(--cyan); border: 1px solid rgba(0,229,255,.35); padding: 3px 9px; border-radius: 999px; margin-top: 14px; align-self: flex-start; }
-  .note { margin-top: 14px; font-size: .82rem; color: var(--muted); }
-
-  .callout {
-    margin-top: 20px;
-    padding: 18px 22px;
-    border-radius: 14px;
-    border: 1px solid rgba(0,229,255,.3);
-    background: rgba(0,229,255,.05);
-    font-size: .92rem;
-    color: #cfd3d6;
-  }
-  .callout b { color: var(--cyan); }
-
-  /* PACKAGES */
-  .packages { display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
-  .pkg {
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 24px;
-    background: var(--bg-2);
-  }
-  .pkg .letter {
-    width: 34px; height: 34px; border-radius: 10px;
-    display: grid; place-items: center;
-    background: linear-gradient(135deg, var(--cyan), var(--lime));
-    color: #0a0a0b; font: 700 1rem 'Space Grotesk', sans-serif;
-    margin-bottom: 14px;
-  }
-  .pkg h3 { font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; }
-  .pkg .kind { color: var(--muted); font-size: .8rem; text-transform: uppercase; letter-spacing: .1em; margin: 2px 0 10px; }
-  .pkg p { color: #cfcfd4; font-size: .92rem; }
-
-  /* TERMS */
-  .terms { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); margin-top: 20px; }
-  .term {
-    display: flex; gap: 14px;
-    background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px;
-    font-size: .92rem;
-  }
-  .term .ck { color: var(--lime); font-weight: 700; }
-
-  /* PAYMENT + CONTACT */
-  .two { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-top: 20px; }
-  .panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 28px; }
-  .panel h3 { font-family: 'Space Grotesk', sans-serif; margin-bottom: 14px; font-size: 1.2rem; }
-  .pay { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 16px; }
-  .pay a { border: 1px solid var(--line); padding: 9px 16px; border-radius: 999px; font-size: .9rem; transition: border-color .15s; }
-  .pay a:hover { border-color: var(--lime); }
-  .panel p { color: var(--muted); font-size: .92rem; margin-top: 6px; }
-  .panel p b { color: var(--text); font-weight: 600; }
-  .contact-list { list-style: none; display: grid; gap: 10px; }
-  .contact-list a { display: flex; gap: 12px; align-items: center; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; transition: border-color .15s, background .15s; font-size: .95rem; }
-  .contact-list a:hover { border-color: var(--cyan); background: rgba(0,229,255,.05); }
-  .contact-list span { color: var(--muted); font-size: .8rem; min-width: 74px; }
-
-  .final {
-    margin: 72px 0 0;
-    padding: 56px 24px;
-    text-align: center;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    background:
-      radial-gradient(600px 220px at 20% 0%, rgba(0,229,255,.12), transparent 70%),
-      radial-gradient(600px 220px at 80% 100%, rgba(198,255,0,.10), transparent 70%),
-      var(--bg-2);
-  }
-  .final h2 { font-family: 'Space Grotesk', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); margin-bottom: 10px; }
-  .final p { color: var(--muted); max-width: 520px; margin: 0 auto 26px; }
-
-  footer { text-align: center; color: var(--muted); font-size: .82rem; padding: 40px 0 56px; }
-  .hidden { display: none !important; }
-
-  @media (max-width: 520px) {
-    .hero { padding: 64px 0 52px; }
-    .grid, .packages { grid-template-columns: 1fr; }
-    .card { padding: 22px; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    * { transition: none !important; scroll-behavior: auto !important; }
-  }
+:root{--bg:#0d1116;--line:#252e38;--text:#e0e4e9;--mute:#929daa;--steel:#aec1d4;--gold:#d4c08a;
+--body:"Archivo",system-ui,-apple-system,"Segoe UI",sans-serif;--head:"Big Shoulders Display","Arial Narrow",Impact,sans-serif}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:radial-gradient(ellipse 80% 460px at 50% 0,#1b2530 0,transparent 70%) no-repeat,var(--bg);color:var(--text);font:400 16.5px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+.wrap{max-width:980px;margin:0 auto;padding:0 28px}
+a{color:var(--steel);text-underline-offset:3px}
+a:focus-visible,summary:focus-visible,button:focus-visible,.btn:focus-visible{outline:2px solid var(--steel);outline-offset:3px}
+header{padding:96px 0 60px}
+.kicker{color:var(--gold);font:700 22px var(--head);letter-spacing:.2em;text-transform:uppercase;margin-bottom:18px}
+h1{font:900 clamp(60px,13.5vw,148px)/.88 var(--head);letter-spacing:-.005em;text-transform:uppercase;color:#f1f3f6}
+h1 i{display:block;font-style:normal;color:var(--steel);font-size:.46em;letter-spacing:.06em;line-height:1.3;margin-top:.14em}
+.lede{margin-top:30px;max-width:520px;color:var(--text);font-size:19px;line-height:1.5}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-block;font:800 21px/1 var(--head);letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:16px 28px 15px;border:2px solid var(--gold);color:var(--gold)}
+.btn.p{background:var(--gold);color:#0d1116}
+.btn:hover{background:#e6d6a6;border-color:#e6d6a6;color:#0d1116}
+.brief{display:flex;flex-wrap:wrap;margin:56px 0 0;border-top:2px solid var(--steel);border-bottom:1px solid var(--line)}
+.brief div{flex:1 1 0;min-width:150px;padding:20px 24px 18px;border-left:1px solid var(--line)}
+.brief div:first-child{border-left:0;padding-left:0}
+.brief dt{font:800 38px/1 var(--head);color:var(--gold);text-transform:uppercase;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.brief dd{margin-top:8px;font-size:14px;line-height:1.4;color:var(--mute)}
+.rules{margin-top:26px;display:grid;gap:6px;color:var(--mute);font-size:15px}
+.rules em{font-style:normal;font-weight:600;color:var(--text)}
+.bar{display:flex;justify-content:space-between;align-items:center;padding:20px 0 14px;color:var(--mute);font-size:14.5px}
+.bar button{background:none;border:0;border-bottom:1px solid var(--line);color:var(--steel);font:inherit;font-size:14.5px;padding:4px 0;margin-left:22px;cursor:pointer}
+.bar button:hover{border-color:var(--steel)}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr 34px;gap:4px 20px;align-items:center;padding:30px 0}
+summary::-webkit-details-marker{display:none}
+summary h2{font:800 clamp(34px,6vw,52px)/1 var(--head);letter-spacing:.015em;text-transform:uppercase;color:#f1f3f6}
+summary p{grid-column:1;color:var(--mute);font-size:15px;max-width:600px}
+summary::after{content:"+";grid-column:2;grid-row:1/3;width:34px;height:34px;border:2px solid var(--steel);display:grid;place-items:center;font:700 24px/1 var(--head);color:var(--steel)}
+summary:hover::after{background:var(--steel);color:#0d1116}
+details[open] summary::after{content:"\2212"}
+details[open] summary{padding-bottom:26px}
+.groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(390px,1fr));gap:48px 60px;padding:6px 0 56px}
+.g h3{font:800 27px/1.1 var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--steel);padding-bottom:10px;border-bottom:2px solid var(--steel)}
+.g>p{margin:12px 0 8px;color:var(--mute);font-size:14.5px;line-height:1.55}
+.r{display:flex;align-items:baseline;padding:11px 0}
+.r>span{order:0;font-weight:500}
+.r::after{content:"";order:1;flex:1;min-width:16px;margin:0 10px;border-bottom:1px dotted #3a4652}
+.r strong{order:2;font:800 28px/1 var(--head);letter-spacing:.02em;color:var(--gold);white-space:nowrap;font-variant-numeric:tabular-nums}
+.r small{display:block;font-weight:400;color:var(--mute);font-size:13.5px;line-height:1.4;margin-top:2px}
+.n{margin-top:10px;color:var(--mute);font-size:14px;line-height:1.55}
+footer{padding:72px 0 100px;border-top:2px solid var(--steel)}
+footer h2{font:900 clamp(38px,7vw,60px)/1 var(--head);text-transform:uppercase;color:#f1f3f6;margin-bottom:28px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:44px}
+footer h3{font:800 24px var(--head);letter-spacing:.06em;text-transform:uppercase;color:var(--steel);margin:0 0 12px}
+footer li{list-style:none;color:var(--mute);font-size:15.5px;padding:4px 0}
+footer ul{padding:0}
+footer li span{color:var(--text);font-weight:600}
+.copy{margin-top:60px;color:var(--mute);font-size:13.5px}
+.dock{display:none}
+@media(max-width:600px){body{font-size:16px;padding-bottom:72px}header{padding:60px 0 44px}.groups{grid-template-columns:1fr;gap:38px}.brief div{flex:1 1 45%;padding:16px 14px 14px;border-left:0;border-top:1px solid var(--line)}.brief div:nth-child(-n+2){border-top:0}.brief div:nth-child(odd){padding-left:0}.brief div:nth-child(even){border-left:1px solid var(--line)}
+.dock{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:5;background:#0d1116;border-top:2px solid var(--gold);padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));gap:10px}
+.dock .btn{flex:1;text-align:center;padding:14px 10px 13px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-
-<header class="hero">
-  <div class="wrap">
-    <span class="eyebrow">Denver Born</span>
-    <h1>SGauge <span>/ RAPDAD RADIO</span></h1>
-    <p class="sub">Producer · Artist Developer · Music Ops. Recording, visuals, content and strategy built to move your music forward.</p>
-    <div class="trust">
-      <span><b>Colorado</b> pricing</span>
-      <span><b>+$50</b> outside Metro Denver</span>
-      <span><b>50%</b> deposit locks your slot</span>
-      <span><b>2 free</b> edits on every project</span>
-    </div>
-  </div>
-</header>
-
-<nav class="filters" aria-label="Service categories">
-  <div class="wrap">
-    <button class="chip active" data-filter="all">All</button>
-    <button class="chip" data-filter="audio">Audio</button>
-    <button class="chip" data-filter="video">Video</button>
-    <button class="chip" data-filter="visual">Photo &amp; Art</button>
-    <button class="chip" data-filter="content">Content &amp; Interviews</button>
-    <button class="chip" data-filter="dev">Development</button>
-    <button class="chip" data-filter="packages">Packages</button>
-  </div>
-</nav>
+<header><div class="wrap">
+<p class="kicker">Record. Mix. Shoot. Release.</p>
+<h1>SGauge<i>/ RAPDAD RADIO</i></h1>
+<p class="lede">Everything to take a record from idea to release, from one operator in Denver. Put down 50% and the date is yours.</p>
+<div class="cta"><a class="btn p" href="tel:7194157015">Call 719-415-7015</a><a class="btn" href="sms:7194157015">Text me</a><a class="btn" href="mailto:indeedopebeats@gmail.com?subject=Booking">Send a demo</a></div>
+<dl class="brief">
+<div><dt>Colorado</dt><dd>Pricing shown</dd></div>
+<div><dt>+$50</dt><dd>Outside Metro Denver</dd></div>
+<div><dt>50%</dt><dd>Deposit locks your slot</dd></div>
+<div><dt>2 free</dt><dd>Edits on every project</dd></div>
+</dl>
+<div class="rules">
+<p><em>Exclusive rights.</em> No beat leases. Every beat is sold exclusive.</p>
+<p><em>Custom work.</em> Anything marked "per case" is quoted after a quick conversation.</p>
+</div>
+</div></header>
 
 <main class="wrap">
-
-  <div class="notice">
-    <div><strong>Service area</strong>Prices shown are for Colorado. Any service outside the Metro Denver area adds a $50 surcharge.</div>
-    <div><strong>Exclusive rights</strong>No beat leases. All beats are sold with exclusive rights.</div>
-    <div><strong>Custom work</strong>Anything marked "per case" is quoted after a quick conversation.</div>
-  </div>
-
-  <!-- 1 AUDIO -->
-  <section class="group" data-cat="audio">
-    <div class="group-head">
-      <span class="num">01</span>
-      <h2>Recording &amp; Engineering</h2>
-      <p>In-studio sessions or remote. Mixed and mastered, ready for streaming.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Studio Recording</h3>
-        <p class="desc">Client in studio. Vocals, punch-ins, overdubs, comping and session prep, recorded in my studio.</p>
-        <ul class="rows">
-          <li><span class="name">Hourly session</span><span class="price">$50/hr</span></li>
-          <li><span class="name">Per song, recorded + mixed + mastered</span><span class="price">$200</span></li>
-          <li><span class="name">Remote recording consultation<small>1 hour max</small></span><span class="price">$65</span></li>
-        </ul>
-        <span class="tag">Recording: same day</span>
-      </article>
-
-      <article class="card feature">
-        <h3>Mixing &amp; Mastering</h3>
-        <p class="desc">Pre-recorded songs. Full song, vocal, 2-track beat and stem mixing, plus stereo and stem mastering.</p>
-        <ul class="rows">
-          <li><span class="name">Hourly mixing / mastering</span><span class="price">$40/hr</span></li>
-          <li><span class="name">Per song, mixed + mastered</span><span class="price">$180</span></li>
-          <li><span class="name">Radio / streaming-ready prep</span><span class="price">$50/hr</span></li>
-        </ul>
-        <span class="tag">Mixing: 1 week</span>
-      </article>
-
-      <article class="card">
-        <h3>Cleanup &amp; Edits</h3>
-        <p class="desc">Make existing audio sound right.</p>
-        <ul class="rows">
-          <li><span class="name">Vocal tuning &amp; timing correction</span><span class="price">$40/hr</span></li>
-          <li><span class="name">Noise reduction &amp; restoration</span><span class="price">$40/hr</span></li>
-          <li><span class="name">Audio, podcast &amp; interview editing</span><span class="price">$40/hr</span></li>
-          <li><span class="name">Mix revisions</span><span class="price">$40/hr</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>Deliverable Add-ons</h3>
-        <p class="desc">Extra versions of your song.</p>
-        <ul class="rows">
-          <li><span class="name">Instrumental mix</span><span class="price">$40/hr</span></li>
-          <li><span class="name">Acapella export</span><span class="price">$30</span></li>
-          <li><span class="name">Clean / radio edit</span><span class="price">$30</span></li>
-          <li><span class="name">Performance / backing track</span><span class="price">$30</span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- 2 PRODUCTION -->
-  <section class="group" data-cat="audio">
-    <div class="group-head">
-      <span class="num">02</span>
-      <h2>Production &amp; Songwriting</h2>
-      <p>Beats, hooks, verses and features. Discounts apply when you use my instrumental production.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Beats</h3>
-        <p class="desc">Custom builds based on your reference, or pick from pre-made. Exclusive rights only.</p>
-        <ul class="rows">
-          <li><span class="name">Custom beat<small>Based on reference. Includes arrangement.</small></span><span class="price">$125<small>or $40/hr</small></span></li>
-          <li><span class="name">Pre-made exclusive</span><span class="price">$60</span></li>
-          <li><span class="name">Beat arrangement &amp; restructuring</span><span class="price">$40/hr</span></li>
-        </ul>
-        <p class="note">No leases available.</p>
-      </article>
-
-      <article class="card feature">
-        <h3>Songwriting &amp; Co-writing</h3>
-        <p class="desc">Hooks, verses and melody development.</p>
-        <ul class="rows">
-          <li><span class="name">Hook / chorus<small>Includes melody development</small></span><span class="price">$100</span></li>
-          <li><span class="name">2 verses</span><span class="price">$50</span></li>
-          <li><span class="name">Hourly writing session</span><span class="price">$50/hr</span></li>
-        </ul>
-        <p class="note">Discount when using my instrumental production.</p>
-      </article>
-
-      <article class="card">
-        <h3>Features</h3>
-        <p class="desc">Guest appearances on your record.</p>
-        <ul class="rows">
-          <li><span class="name">Feature hook</span><span class="price">$100</span></li>
-          <li><span class="name">Feature verse</span><span class="price">$80</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>A&amp;R Session</h3>
-        <p class="desc">Music collaboration consultation: song direction, beat selection, feedback.</p>
-        <ul class="rows">
-          <li><span class="name">A&amp;R session</span><span class="price">$50/hr</span></li>
-        </ul>
-        <p class="note">Vocal production, artist direction, beat selection, demo production and song arrangement are included in studio sessions.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- 3 VIDEO -->
-  <section class="group" data-cat="video">
-    <div class="group-head">
-      <span class="num">03</span>
-      <h2>Video Production</h2>
-      <p>Music videos, performance reels, visualizers and lyric videos.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Music Video</h3>
-        <p class="desc">Run-n-gun for speed, full production with storyboard for scale. Teasers and trailers included.</p>
-        <ul class="rows">
-          <li><span class="name">Production, run-n-gun</span><span class="price">$250</span></li>
-          <li><span class="name">Production, full + storyboard</span><span class="price">$450</span></li>
-          <li><span class="name">Filming only<small>No edits, no storyboard</small></span><span class="price">$175 / $300<small>run-n-gun / full</small></span></li>
-          <li><span class="name">Editing only<small>No filming</small></span><span class="price">$175 / $300<small>run-n-gun / full</small></span></li>
-        </ul>
-        <span class="tag">Turnaround: 2 weeks</span>
-      </article>
-
-      <article class="card">
-        <h3>Performance &amp; Visualizers</h3>
-        <p class="desc">Edits included.</p>
-        <ul class="rows">
-          <li><span class="name">Performance / one-take reel<small>1 two-take reel, vertical</small></span><span class="price">$100</span></li>
-          <li><span class="name">Artist visualizer<small>1 two-take video, vertical or horizontal</small></span><span class="price">$100</span></li>
-          <li><span class="name">Lyric video<small>Extra for songs over 3:30</small></span><span class="price">$80</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>Editing &amp; Extras</h3>
-        <p class="desc">Already filmed? I'll cut it.</p>
-        <ul class="rows">
-          <li><span class="name">Short-form edit<small>Pre-filmed, 2 to 4 takes max</small></span><span class="price">$40/reel</span></li>
-          <li><span class="name">Behind-the-scenes footage</span><span class="price">$60/hr<small>+ $75 editing</small></span></li>
-          <li><span class="name">Captions &amp; subtitles</span><span class="price">$40/hr</span></li>
-          <li><span class="name">Thumbnail design</span><span class="price">$25</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>Documentary &amp; Direction</h3>
-        <p class="desc">Mini-docs, storyboards, creative direction and concept development.</p>
-        <ul class="rows">
-          <li><span class="name">Documentary / mini-doc consultation</span><span class="price">$50</span></li>
-          <li><span class="name">Storyboarding, creative direction, concepts</span><span class="price">Per case</span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- 4 PHOTO -->
-  <section class="group" data-cat="visual">
-    <div class="group-head">
-      <span class="num">04</span>
-      <h2>Photography &amp; Visual Branding</h2>
-      <p>Shoots, cover art and the visuals that make a release look finished.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Photo Shoots</h3>
-        <p class="desc">Edited, high-quality files.</p>
-        <ul class="rows">
-          <li><span class="name">Artist photoshoot<small>10 HQ photos</small></span><span class="price">$75</span></li>
-          <li><span class="name">Press / EPK photos<small>15 HQ photos</small></span><span class="price">$120</span></li>
-          <li><span class="name">Promotional &amp; portrait</span><span class="price">$150/hr</span></li>
-          <li><span class="name">Album cover photography</span><span class="price">$100/hr</span></li>
-          <li><span class="name">Event photography<small>Edits included</small></span><span class="price">$250/event</span></li>
-        </ul>
-        <span class="tag">Turnaround: 1 to 2 weeks</span>
-      </article>
-
-      <article class="card">
-        <h3>Artwork &amp; Graphics</h3>
-        <p class="desc">Discounts available on simple projects.</p>
-        <ul class="rows">
-          <li><span class="name">Cover art design</span><span class="price">$125</span></li>
-          <li><span class="name">Single &amp; EP cover</span><span class="price">$75</span></li>
-          <li><span class="name">Promotional flyer</span><span class="price">$50</span></li>
-          <li><span class="name">YouTube thumbnail</span><span class="price">$25</span></li>
-          <li><span class="name">Social media graphics</span><span class="price">$40/hr</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>Brand Identity</h3>
-        <p class="desc">Artist branding consultation, visual identity development and creative campaign concepts.</p>
-        <ul class="rows">
-          <li><span class="name">Branding &amp; campaign concepts</span><span class="price">Per case</span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- 5 RAPDAD RADIO -->
-  <section class="group" data-cat="content">
-    <div class="group-head">
-      <span class="num">05</span>
-      <h2>RAPDAD RADIO</h2>
-      <p>Filmed interviews with narrative and positioning, shaped around your goal.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Artist Interview</h3>
-        <p class="desc">Full filmed interview. Editing, post-production, short-form clips, audio cleanup and artist spotlight are all included.</p>
-        <ul class="rows">
-          <li><span class="name">RAPDAD RADIO interview</span><span class="price">$125</span></li>
-          <li><span class="name">Professional studio add-on</span><span class="price">+$120</span></li>
-          <li><span class="name">Interview editing outside RAPDAD RADIO</span><span class="price">$60/hr</span></li>
-          <li><span class="name">Interview audio cleanup (standalone)</span><span class="price">$40/hr</span></li>
-        </ul>
-        <p class="note">Selected location outside Metro Denver: +$50.</p>
-      </article>
-
-      <article class="card">
-        <h3>Reviews &amp; Commentary</h3>
-        <p class="desc">Honest takes on your music.</p>
-        <ul class="rows">
-          <li><span class="name">Single review</span><span class="price">$40</span></li>
-          <li><span class="name">Music commentary &amp; discussion</span><span class="price">$40</span></li>
-          <li><span class="name">Album review</span><span class="price">$60</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>On-Location &amp; Sponsored</h3>
-        <p class="desc">Red-carpet and event interviews, sponsored segments, guest hosting and brand-sponsored content.</p>
-        <ul class="rows">
-          <li><span class="name">Custom interview projects</span><span class="price">Per case</span></li>
-        </ul>
-      </article>
-    </div>
-    <div class="callout"><b>Production fee is always separate from promotional placement.</b> Views, reach, streams and audience growth are not guaranteed unless you have a clearly defined paid advertising service with measurable deliverables.</div>
-  </section>
-
-  <!-- 6 CONTENT -->
-  <section class="group" data-cat="content">
-    <div class="group-head">
-      <span class="num">06</span>
-      <h2>Social Media &amp; Content</h2>
-      <p>Vertical content built for hooks, pacing and repeatability.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Reel Packs</h3>
-        <p class="desc">Reels, TikToks and YouTube Shorts. Promo videos, artist intros, release announcements and teaser campaigns.</p>
-        <ul class="rows">
-          <li><span class="name">3 reels, filmed + edited</span><span class="price">$100</span></li>
-          <li><span class="name">3 reels, edit only<small>Pre-filmed</small></span><span class="price">$80</span></li>
-          <li><span class="name">Content batching session</span><span class="price">$50/hr</span></li>
-        </ul>
-        <span class="tag">Turnaround: 1 week</span>
-      </article>
-
-      <article class="card feature">
-        <h3>Monthly Content Package</h3>
-        <p class="desc">Consistent output without the scramble.</p>
-        <ul class="rows">
-          <li><span class="name">7 reels per month</span><span class="price">$200/mo</span></li>
-        </ul>
-      </article>
-
-      <article class="card">
-        <h3>Copy &amp; Strategy</h3>
-        <ul class="rows">
-          <li><span class="name">Caption writing</span><span class="price">$40/hr</span></li>
-          <li><span class="name">Behind-the-scenes packages</span><span class="price">$60/hr<small>+ $75 editing</small></span></li>
-          <li><span class="name">Content strategy &amp; calendars</span><span class="price">Per case</span></li>
-          <li><span class="name">Profile optimization &amp; channel management</span><span class="price">Per case</span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- 7-8 DEV + MANAGEMENT -->
-  <section class="group" data-cat="dev">
-    <div class="group-head">
-      <span class="num">07</span>
-      <h2>Artist Development &amp; Management</h2>
-      <p>One focused session to diagnose where you are and map what to do next.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Mini-Management Session</h3>
-        <p class="desc">Decisions and a clear direction. No fluff.</p>
-        <ul class="rows">
-          <li><span class="name">Career strategy, release planning &amp; rollout</span><span class="price">$120</span></li>
-          <li><span class="name">Branding, positioning &amp; image</span><span class="price">$120</span></li>
-          <li><span class="name">Music business, distribution &amp; monetization</span><span class="price">$120</span></li>
-          <li><span class="name">EPK, bio, press release &amp; one-sheet</span><span class="price">$120</span></li>
-          <li><span class="name">Management, booking &amp; coordination</span><span class="price">$120</span></li>
-        </ul>
-        <p class="note">Session paid upfront.</p>
-      </article>
-
-      <article class="card">
-        <h3>Retainers &amp; Representation</h3>
-        <p class="desc">High-value clients only. I build monthly structure so content, music and rollout all line up.</p>
-        <ul class="rows">
-          <li><span class="name">Monthly retainer, flat-fee or commission-based</span><span class="price">Custom</span></li>
-        </ul>
-        <p class="note">We only move forward if there is alignment.</p>
-      </article>
-    </div>
-  </section>
-
-  <!-- 9 BOOKING -->
-  <section class="group" data-cat="dev">
-    <div class="group-head">
-      <span class="num">08</span>
-      <h2>Booking, Audio Branding &amp; Creative</h2>
-      <p>Quoted per case.</p>
-    </div>
-    <div class="grid">
-      <article class="card">
-        <h3>Booking &amp; Appearances</h3>
-        <ul class="rows">
-          <li><span class="name">Performance booking assistance</span><span class="price">Per case</span></li>
-          <li><span class="name">Event appearance coordination</span><span class="price">Per case</span></li>
-          <li><span class="name">Featured performances &amp; guest verses</span><span class="price">Per case</span></li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Audio Branding</h3>
-        <ul class="rows">
-          <li><span class="name">Intros, outros &amp; podcast intros</span><span class="price">Per case</span></li>
-          <li><span class="name">Sonic logos &amp; promotional audio</span><span class="price">Per case</span></li>
-          <li><span class="name">Custom music for content</span><span class="price">Per case</span></li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Creative Support</h3>
-        <ul class="rows">
-          <li><span class="name">Brainstorming sessions</span><span class="price">Per case</span></li>
-          <li><span class="name">Project feedback &amp; critique</span><span class="price">Per case</span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- 10 EVENTS -->
-  <section class="group" data-cat="video">
-    <div class="group-head">
-      <span class="num">09</span>
-      <h2>Events &amp; Live Production</h2>
-      <p>Content that captures the energy and makes people want to be at the next one.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Event Coverage</h3>
-        <p class="desc">Concerts, parties and shows. Edits included.</p>
-        <ul class="rows">
-          <li><span class="name">Event videography</span><span class="price">$250/night</span></li>
-          <li><span class="name">Event photography</span><span class="price">$250/night</span></li>
-          <li><span class="name">Concert recap / BTS content packages</span><span class="price">$250/night</span></li>
-          <li><span class="name">Recap editing<small>Pre-filmed</small></span><span class="price">$200</span></li>
-        </ul>
-        <span class="tag">Turnaround: 5 days max</span>
-      </article>
-      <article class="card">
-        <h3>Live &amp; Quick Hits</h3>
-        <ul class="rows">
-          <li><span class="name">Live performance filming</span><span class="price">$75<small>per performer</small></span></li>
-          <li><span class="name">Artist interviews at events</span><span class="price">$30<small>per artist</small></span></li>
-          <li><span class="name">Event promotional video<small>Filming + edits</small></span><span class="price">$100</span></li>
-          <li><span class="name">Same-day social edits</span><span class="price">+$75<small>rush</small></span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- 11 EDUCATION -->
-  <section class="group" data-cat="dev">
-    <div class="group-head">
-      <span class="num">10</span>
-      <h2>Lessons &amp; Mentorship</h2>
-      <p>Learn the craft one-on-one.</p>
-    </div>
-    <div class="grid">
-      <article class="card feature">
-        <h3>Technical Lessons</h3>
-        <p class="desc">Recording, mixing, mastering, vocal production, music production and DAW workflow.</p>
-        <ul class="rows">
-          <li><span class="name">One-on-one lesson</span><span class="price">$50/hr</span></li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Mentorship &amp; Consulting</h3>
-        <p class="desc">Content creation coaching, project reviews, studio workflow, release strategy and beginner artist mentorship.</p>
-        <ul class="rows">
-          <li><span class="name">Mini-management session</span><span class="price">$120</span></li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <!-- PACKAGES -->
-  <section class="group" data-cat="packages">
-    <div class="group-head">
-      <span class="num">&#9733;</span>
-      <h2>Bundled Packages</h2>
-      <p>Everything you need in one lane. Package pricing quoted per project, so message me with what you are releasing.</p>
-    </div>
-    <div class="packages">
-      <div class="pkg"><div class="letter">A</div><h3>Song Finish</h3><div class="kind">Audio</div><p>Recording, vocal editing, mixing and mastering.</p></div>
-      <div class="pkg"><div class="letter">B</div><h3>Artist Release</h3><div class="kind">Music + Visuals</div><p>Song production or mixing, cover artwork and promotional teaser clips.</p></div>
-      <div class="pkg"><div class="letter">C</div><h3>RAPDAD RADIO Interview</h3><div class="kind">Media</div><p>Filmed interview, full edited video and a defined number of short-form clips.</p></div>
-      <div class="pkg"><div class="letter">D</div><h3>Content Day</h3><div class="kind">Social Media</div><p>Scheduled filming session with multiple edited vertical videos, formatted for social platforms.</p></div>
-      <div class="pkg"><div class="letter">E</div><h3>Artist Development</h3><div class="kind">Strategy</div><p>Consultation, brand assessment, release plan and a prioritized action list.</p></div>
-      <div class="pkg"><div class="letter">F</div><h3>Event Coverage</h3><div class="kind">Live Events</div><p>Defined coverage window, recap video and selected photo or short-form deliverables.</p></div>
-    </div>
-  </section>
-
-  <!-- TERMS -->
-  <section class="group">
-    <div class="group-head">
-      <span class="num">&#10003;</span>
-      <h2>Booking Terms</h2>
-    </div>
-    <div class="terms">
-      <div class="term"><span class="ck">&#10003;</span><span><b>50% non-refundable deposit</b> required for all bookings.</span></div>
-      <div class="term"><span class="ck">&#10003;</span><span><b>2 free edits</b> / exports included on all projects.</span></div>
-      <div class="term"><span class="ck">&#10003;</span><span><b>1 reschedule</b> allowed. New deposit required after 2 cancellations.</span></div>
-      <div class="term"><span class="ck">&#10003;</span><span><b>Metro Denver</b> service area. <b>+$50</b> outside.</span></div>
-    </div>
-  </section>
-
-  <!-- PAYMENT + CONTACT -->
-  <section class="group" id="contact">
-    <div class="two">
-      <div class="panel">
-        <h3>Payment Options</h3>
-        <div class="pay">
-          <a href="https://cash.app/$rapdad55">Cash App</a>
-          <a href="https://www.venmo.com/u/rapdad55">Venmo</a>
-          <a href="tel:7206468987">Apple Pay</a>
-          <a href="#zelle">Zelle</a>
-          <a href="#contact">Service Trades</a>
-        </div>
-        <p id="zelle"><b>Zelle</b> · Shawn Gladue · gladue.s.work@gmail.com</p>
-        <p><b>Apple Pay</b> · <a href="tel:7206468987">720-646-8987</a></p>
-      </div>
-      <div class="panel">
-        <h3>Get in Touch</h3>
-        <ul class="contact-list">
-          <li><a href="tel:7194157015"><span>Call</span>719-415-7015</a></li>
-          <li><a href="mailto:indeedopebeats@gmail.com"><span>Email</span>indeedopebeats@gmail.com</a></li>
-          <li><a href="https://instagram.com/s.gauge5500"><span>Instagram</span>@s.gauge5500</a></li>
-        </ul>
-        <p>Send a demo or reference ahead if you have one.</p>
-      </div>
-    </div>
-  </section>
-
+<div class="bar"><span>Select a service to open its rates.</span><span><button id="oa">Open all</button><button id="ca">Close all</button></span></div>
+<div id="out"></div>
 </main>
 
-<footer>&copy; SGauge / RAPDAD RADIO · Denver, CO · Prices subject to change</footer>
+<footer><div class="wrap">
+<h2>Booking terms</h2>
+<div class="cols">
+<ul>
+<li><span>50% non-refundable deposit</span> required for all bookings.</li>
+<li><span>2 free edits</span> and exports included on all projects.</li>
+<li><span>1 reschedule</span> allowed. New deposit required after 2 cancellations.</li>
+<li><span>Metro Denver</span> service area. +$50 outside.</li>
+</ul>
+<div>
+<h3>Payment</h3>
+<ul>
+<li><a href="https://cash.app/$rapdad55">Cash App</a> &nbsp; <a href="https://www.venmo.com/u/rapdad55">Venmo</a></li>
+<li>Apple Pay: 720-646-8987</li>
+<li>Zelle: Shawn Gladue, gladue.s.work@gmail.com</li>
+<li>Service trades: ask</li>
+</ul>
+</div>
+<div id="contact">
+<h3>Contact</h3>
+<ul>
+<li>Call: <a href="tel:7194157015">719-415-7015</a></li>
+<li>Email: <a href="mailto:indeedopebeats@gmail.com">indeedopebeats@gmail.com</a></li>
+<li>Instagram: <a href="https://instagram.com/s.gauge5500">@s.gauge5500</a></li>
+<li>Send a demo or reference ahead if you have one.</li>
+</ul>
+</div>
+</div>
+<p class="copy">SGauge / RAPDAD RADIO. Denver, CO. Prices subject to change.</p>
+</div></footer>
 
+<div class="dock"><a class="btn p" href="tel:7194157015">Call</a><a class="btn" href="sms:7194157015">Text</a></div>
 <script>
-  (function () {
-    var chips = document.querySelectorAll('.chip');
-    var groups = document.querySelectorAll('.group[data-cat]');
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        chips.forEach(function (c) { c.classList.remove('active'); });
-        chip.classList.add('active');
-        var f = chip.getAttribute('data-filter');
-        groups.forEach(function (g) {
-          g.classList.toggle('hidden', f !== 'all' && g.getAttribute('data-cat') !== f);
-        });
-        window.scrollTo({ top: document.querySelector('.filters').offsetTop, behavior: 'smooth' });
-      });
-    });
-  })();
+const D=`
+S|Recording & Engineering|In-studio sessions or remote. Mixed and mastered, ready for streaming.
+G|Studio Recording|Client in studio. Vocals, punch-ins, overdubs, comping and session prep, recorded in my studio.
+I|Hourly session||$50/hr
+I|Per song, recorded + mixed + mastered||$200
+I|Remote recording consultation|1 hour max|$65
+N|Recording: same day
+G|Mixing & Mastering|Pre-recorded songs. Full song, vocal, 2-track beat and stem mixing, plus stereo and stem mastering.
+I|Hourly mixing / mastering||$40/hr
+I|Per song, mixed + mastered||$180
+I|Radio / streaming-ready prep||$50/hr
+N|Mixing: 1 week
+G|Cleanup & Edits|Make existing audio sound right.
+I|Vocal tuning & timing correction||$40/hr
+I|Noise reduction & restoration||$40/hr
+I|Audio, podcast & interview editing||$40/hr
+I|Mix revisions||$40/hr
+G|Deliverable Add-ons|Extra versions of your song.
+I|Instrumental mix||$40/hr
+I|Acapella export||$30
+I|Clean / radio edit||$30
+I|Performance / backing track||$30
+S|Production & Songwriting|Beats, hooks, verses and features. Discounts apply when you use my instrumental production.
+G|Beats|Custom builds based on your reference, or pick from pre-made. Exclusive rights only.
+I|Custom beat|Based on reference. Includes arrangement.|$125 or $40/hr
+I|Pre-made exclusive||$60
+I|Beat arrangement & restructuring||$40/hr
+N|No leases available.
+G|Songwriting & Co-writing|Hooks, verses and melody development.
+I|Hook / chorus|Includes melody development|$100
+I|2 verses||$50
+I|Hourly writing session||$50/hr
+N|Discount when using my instrumental production.
+G|Features|Guest appearances on your record.
+I|Feature hook||$100
+I|Feature verse||$80
+G|A&R Session|Music collaboration consultation: song direction, beat selection, feedback.
+I|A&R session||$50/hr
+N|Vocal production, artist direction, beat selection, demo production and song arrangement are included in studio sessions.
+S|Video Production|Music videos, performance reels, visualizers and lyric videos.
+G|Music Video|Run-n-gun for speed, full production with storyboard for scale. Teasers and trailers included.
+I|Production, run-n-gun||$250
+I|Production, full + storyboard||$450
+I|Filming only|No edits, no storyboard. Run-n-gun / full.|$175 / $300
+I|Editing only|No filming. Run-n-gun / full.|$175 / $300
+N|Turnaround: 2 weeks
+G|Performance & Visualizers|Edits included.
+I|Performance / one-take reel|1 to 2 takes, vertical|$100
+I|Artist visualizer|1 to 2 takes, vertical or horizontal|$100
+I|Lyric video|Extra for songs over 3:30|$80
+G|Editing & Extras|Already filmed? I'll cut it.
+I|Short-form edit|Pre-filmed, 2 to 4 takes max|$40/reel
+I|Behind-the-scenes footage|Plus $75 editing|$60/hr
+I|Captions & subtitles||$40/hr
+I|Thumbnail design||$25
+G|Documentary & Direction|Mini-docs, storyboards, creative direction and concept development.
+I|Documentary / mini-doc consultation||$50
+I|Storyboarding, creative direction, concepts||Per case
+S|Photography & Visual Branding|Shoots, cover art and the visuals that make a release look finished.
+G|Photo Shoots|Edited, high-quality files.
+I|Artist photoshoot|10 HQ photos|$75
+I|Press / EPK photos|15 HQ photos|$120
+I|Promotional & portrait||$150/hr
+I|Album cover photography||$100/hr
+I|Event photography|Edits included|$250/event
+N|Turnaround: 1 to 2 weeks
+G|Artwork & Graphics|Discounts available on simple projects.
+I|Cover art design||$125
+I|Single & EP cover||$75
+I|Promotional flyer||$50
+I|YouTube thumbnail||$25
+I|Social media graphics||$40/hr
+G|Brand Identity|Artist branding consultation, visual identity development and creative campaign concepts.
+I|Branding & campaign concepts||Per case
+S|RAPDAD RADIO|Filmed interviews with narrative and positioning, shaped around your goal.
+G|Artist Interview|Full filmed interview. Editing, post-production, short-form clips, audio cleanup and artist spotlight are all included.
+I|RAPDAD RADIO interview||$125
+I|Professional studio add-on||+$120
+I|Interview editing outside RAPDAD RADIO||$60/hr
+I|Interview audio cleanup (standalone)||$40/hr
+N|Selected location outside Metro Denver: +$50.
+G|Reviews & Commentary|Honest takes on your music.
+I|Single review||$40
+I|Music commentary & discussion||$40
+I|Album review||$60
+G|On-Location & Sponsored|Red-carpet and event interviews, sponsored segments, guest hosting and brand-sponsored content.
+I|Custom interview projects||Per case
+N|Production fee is always separate from promotional placement. Views, reach, streams and audience growth are not guaranteed unless you have a clearly defined paid advertising service with measurable deliverables.
+S|Social Media & Content|Vertical content built for hooks, pacing and repeatability.
+G|Reel Packs|Reels, TikToks and YouTube Shorts. Promo videos, artist intros, release announcements and teaser campaigns.
+I|3 reels, filmed + edited||$100
+I|3 reels, edit only|Pre-filmed|$80
+I|Content batching session||$50/hr
+N|Turnaround: 1 week
+G|Monthly Content Package|Consistent output without the scramble.
+I|7 reels per month||$200/mo
+G|Copy & Strategy|
+I|Caption writing||$40/hr
+I|Behind-the-scenes packages|Plus $75 editing|$60/hr
+I|Content strategy & calendars||Per case
+I|Profile optimization & channel management||Per case
+S|Artist Development & Management|One focused session to diagnose where you are and map what to do next.
+G|Mini-Management Session|Decisions and a clear direction. No fluff.
+I|Career strategy, release planning & rollout||$120
+I|Branding, positioning & image||$120
+I|Music business, distribution & monetization||$120
+I|EPK, bio, press release & one-sheet||$120
+I|Management, booking & coordination||$120
+N|Session paid upfront.
+G|Retainers & Representation|High-value clients only. I build monthly structure so content, music and rollout all line up.
+I|Monthly retainer, flat-fee or commission-based||Custom
+N|We only move forward if there is alignment.
+S|Booking, Audio Branding & Creative|Quoted per case.
+G|Booking & Appearances|
+I|Performance booking assistance||Per case
+I|Event appearance coordination||Per case
+I|Featured performances & guest verses||Per case
+G|Audio Branding|
+I|Intros, outros & podcast intros||Per case
+I|Sonic logos & promotional audio||Per case
+I|Custom music for content||Per case
+G|Creative Support|
+I|Brainstorming sessions||Per case
+I|Project feedback & critique||Per case
+S|Events & Live Production|Content that captures the energy and makes people want to be at the next one.
+G|Event Coverage|Concerts, parties and shows. Edits included.
+I|Event videography||$250/night
+I|Event photography||$250/night
+I|Concert recap / BTS content packages||$250/night
+I|Recap editing|Pre-filmed|$200
+N|Turnaround: 5 days max
+G|Live & Quick Hits|
+I|Live performance filming||$75 per performer
+I|Artist interviews at events||$30 per artist
+I|Event promotional video|Filming + edits|$100
+I|Same-day social edits||+$75 rush
+S|Lessons & Mentorship|Learn the craft one-on-one.
+G|Technical Lessons|Recording, mixing, mastering, vocal production, music production and DAW workflow.
+I|One-on-one lesson||$50/hr
+G|Mentorship & Consulting|Content creation coaching, project reviews, studio workflow, release strategy and beginner artist mentorship.
+I|Mini-management session||$120
+S|Bundled Packages|Everything you need in one lane. Package pricing quoted per project, so message me with what you are releasing.
+G|Song Finish|Audio. Recording, vocal editing, mixing and mastering.
+G|Artist Release|Music and visuals. Song production or mixing, cover artwork and promotional teaser clips.
+G|RAPDAD RADIO Interview|Media. Filmed interview, full edited video and a defined number of short-form clips.
+G|Content Day|Social media. Scheduled filming session with multiple edited vertical videos, formatted for social platforms.
+G|Artist Development|Strategy. Consultation, brand assessment, release plan and a prioritized action list.
+G|Event Coverage|Live events. Defined coverage window, recap video and selected photo or short-form deliverables.
+`;
+const esc=s=>s.replace(/&/g,"&amp;").replace(/</g,"&lt;");
+let h="",open=false,first=true;
+const closeG=()=>{h+="</div>"};
+const closeS=()=>{h+="</div></details>"};
+let inG=false,inS=false;
+D.trim().split("\n").forEach(l=>{
+ const [t,a,b,c]=l.split("|");
+ if(t==="S"){if(inG)h+="</div>";if(inS)h+="</div></details>";
+  h+=`<details${first?" open":""}><summary><h2>${esc(a)}</h2><p>${esc(b)}</p></summary><div class="groups">`;first=false;inS=true;inG=false}
+ else if(t==="G"){if(inG)h+="</div>";h+=`<div class="g"><h3>${esc(a)}</h3>${b?`<p>${esc(b)}</p>`:""}`;inG=true}
+ else if(t==="I"){h+=`<div class="r"><span>${esc(a)}${b?`<small>${esc(b)}</small>`:""}</span><strong>${esc(c)}</strong></div>`}
+ else if(t==="N"){h+=`<p class="n">${esc(a)}</p>`}
+});
+h+="</div></div></details>";
+document.getElementById("out").innerHTML=h;
+const all=v=>document.querySelectorAll("details").forEach(d=>d.open=v);
+document.getElementById("oa").onclick=()=>all(true);
+document.getElementById("ca").onclick=()=>all(false);
 </script>
 </body>
 </html>
